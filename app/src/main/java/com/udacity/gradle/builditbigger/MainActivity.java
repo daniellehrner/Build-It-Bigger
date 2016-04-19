@@ -47,11 +47,9 @@ public class MainActivity extends AppCompatActivity implements JokeResponseInter
     }
 
     public void onJokeSuccess(String joke) {
-        if (joke != null) {
-            Intent jokeDisplayIntent = new Intent(this, JokeDisplayActivity.class);
-            jokeDisplayIntent.putExtra(JokeDisplayActivity.KEY_JOKE, joke);
-            startActivity(jokeDisplayIntent);
-        }
+        Intent jokeDisplayIntent = new Intent(this, JokeDisplayActivity.class);
+        jokeDisplayIntent.putExtra(JokeDisplayActivity.KEY_JOKE, joke);
+        startActivity(jokeDisplayIntent);
     }
 
     public void onJokeError() {
