@@ -9,11 +9,7 @@ import android.view.View;
 
 import com.mor_developer.jokedisplay.JokeDisplayActivity;
 
-import me.lehrner.JokeTeller;
-
-
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements JokeResponseInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressWarnings("UnusedParameters")
     public void tellJoke(View view) {
-        Intent jokeDisplayIntent = new Intent(this, JokeDisplayActivity.class);
-        jokeDisplayIntent.putExtra(JokeDisplayActivity.KEY_JOKE, JokeTeller.tellJoke());
-        startActivity(jokeDisplayIntent);
+        JokeEndpointAsyncTask jokeEndpoint = new JokeEndpointAsyncTask();
+        jokeEndpoint.setJokeResponse(this);
+        jokeEndpoint.execute();
     }
 
 
+    public void onJokeResult(String joke) {
+        if (joke != null) {
+            Intent jokeDisplayIntent = new Intent(this, JokeDisplayActivity.class);
+            jokeDisplayIntent.putExtra(JokeDisplayActivity.KEY_JOKE, joke);
+            startActivity(jokeDisplayIntent);
+        }
+    }
 }
