@@ -49,6 +49,11 @@ public class JokeEndpointAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        jokeResponse.onJokeResult(result);
+        if ((result != null) && !result.startsWith("failed to connect")) {
+            jokeResponse.onJokeSuccess(result);
+        }
+        else {
+            jokeResponse.onJokeError();
+        }
     }
 }

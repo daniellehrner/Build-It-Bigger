@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mor_developer.jokedisplay.JokeDisplayActivity;
 
@@ -45,11 +46,15 @@ public class MainActivity extends AppCompatActivity implements JokeResponseInter
         jokeEndpoint.execute();
     }
 
-    public void onJokeResult(String joke) {
+    public void onJokeSuccess(String joke) {
         if (joke != null) {
             Intent jokeDisplayIntent = new Intent(this, JokeDisplayActivity.class);
             jokeDisplayIntent.putExtra(JokeDisplayActivity.KEY_JOKE, joke);
             startActivity(jokeDisplayIntent);
         }
+    }
+
+    public void onJokeError() {
+        Toast.makeText(this, getString(R.string.connection_error), Toast.LENGTH_LONG).show();
     }
 }
