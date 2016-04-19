@@ -1,7 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.daniel.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -15,8 +14,6 @@ import java.io.IOException;
  * Created by Daniel Lehrner
  */
 public class JokeEndpointAsyncTask extends AsyncTask<Void, Void, String> {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-
     private static MyApi myApiService = null;
     private JokeResponseInterface jokeResponse = null;
 
